@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Webcam programming</title>
+	<meta name="description" content="Powered by Dynamsoft’s webcam programming SDK, this sample demonstrates how to grab images from webcams with advanced camera configuration settings.">
+	<link rel="shortcut icon" href="Images/favicon.ico" />
+	<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<div class="fr inline-block pt15">
+				<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-download.aspx" target="_blank" class="btn-download">Download SDK</a>
+			</div>
+			<div class="left-header">
+				<div class="">					
+					<div class="inline-block square-icon vt">
+						<img src="Images/logo-dws.png">
+					</div>
+					<div class="inline-block vt">
+						<div class="vt links">
+							<a href="http://www.dynamsoft.com/" target="_blank" class="bluelink">Dynamsoft</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/products/dynamsoft-webcam-sdk.aspx" target="_blank" class="bluelink">Dynamsoft Webcam SDK</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-sample-download.aspx" target="_blank" class="bluelink">Code Gallery</a>
+							<span> / </span>
+						</div>
+						<div class="title vb">
+							Advanced Camera Control
+						</div>
+					</div>
+				</div>
+				<div class="mt32">
+					This sample demonstrates how to grab images from webcam with advanced camera control, including PAN, TILT and white balance, etc.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-container">
+		<div class="right-container">
+			<div class="grab-container">
+				<div class="source-setting">
+					<div class="source-label">
+						Select Source:<br>
+						Resolution:<br>
+					</div>
+					<div class="source-value">
+						<select id="selectCamera">
+						</select><br>
+						<select id="selectResolution">
+						</select><br>
+					</div>
+				</div>
+				<a id="btn-grab" class="btn-grab">Grab</a>
+			</div>
+
+			<div class="setting-title"><a class="btn-show" for="video-setting" name="btn-show">▲</a>Video Setting</div>
+			<div id="video-setting" class="video-setting setting-container" name="setting-container">
+				<input type="checkbox" id="videoAuto" class="cb-auto mt30 mb10" checked="checked">Auto<br>
+				<div class="setting-detail1">
+					<div class="setting-label">
+						Brightness:<br>
+						contrast:<br>
+						Saturation:<br>
+						Sharpness:<br>
+						Gamma:<br>
+						Gain:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input id="brightness" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="contrast" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="saturation" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="sharpness" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="gamma" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="gain" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+				</div>
+				<div class="setting-detail2">
+					<div class="setting-label">
+						White Balance Temperature:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input id="whiteBalanceTemperature" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+					<div class="setting-label">
+						Backlight Compensation:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input id="backlightCompensation" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+				</div>
+			</div>
+			<div class="setting-title"><a class="btn-show" for="camera-setting" name="btn-show">▼</a>Camera Setting</div>
+			<div id="camera-setting" class="camera-setting setting-container" style="display:none;" name="setting-container">
+				<div class="setting-detail3">
+					<div class="setting-label">
+						Pan:<br>
+						Tilt:<br>
+						Roll:<br>
+						Zoom:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input id="pan" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="tilt" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="roll" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="zoom" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+				</div>
+				<input type="checkbox" id="cameraAuto" class="cb-auto" checked="checked">Auto<br>
+				<div class="setting-detail3">
+					<div class="setting-label">
+						Exposure:<br>
+						Iris:<br>
+						Focus:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input id="exposure" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="iris" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input id="focus" name="prop"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="left-container inline-block">
+			<div id="video-container" class="video-container">
+			</div>
+			<div id="image-container" class="image-container">
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+        Platform & Browser Support:<br>
+        Internet Explorer 6 or above(32 bit/64 bit), any version of Chrome(32 bit/64 bit), any version of Firefox on Windows.<br>
+        <!-- Safari, Chrome and Firefox on Mac OS X 10.6 or later. -->
+	</div>
+	<img id="imgWait" src="Images/wait.gif" class="imgWait" />
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.config.js"> </script>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.initiate.js"> </script>
+	<script src="Scripts/script.js"></script>
+</body>
+</html>

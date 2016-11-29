@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Basic Camera Control</title>
+	<meta name="description" content="This sample demonstrates how to grab images from webcam with basic camera control, including exposure, zoom and brightness, etc.">
+	<link rel="shortcut icon" href="Images/favicon.ico" />
+	<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<div class="fr inline-block pt15">
+				<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-download.aspx" target="_blank" class="btn-download">Download SDK</a>
+			</div>
+			<div class="left-header inline-block">
+				<div class="">
+					<div class="inline-block square-icon vt">
+						<img src="Images/logo-dws.png">
+					</div>
+					<div class="inline-block vt">
+						<div class="vt links">							
+							<a href="http://www.dynamsoft.com/" target="_blank" class="bluelink">Dynamsoft</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/products/dynamsoft-webcam-sdk.aspx" target="_blank" class="bluelink">Dynamsoft Webcam SDK</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-sample-download.aspx" target="_blank" class="bluelink">Code Gallery</a>
+							<span> / </span>							
+						</div>
+						<div class="title vb">
+							Basic Camera Control
+						</div>
+					</div>
+				</div>
+				<div class="mt32">
+					This sample demonstrates how to grab images from webcam with basic camera control, including exposure, zoom and brightness, etc.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-container">
+		<div class="right-container">
+			<div class="setting-container">
+				<h2>Camera&Video Setting</h2>
+				<input type="checkbox" id="isAuto" checked="checked">Auto<br>
+				<div class="setting-detail">
+					<div class="setting-label">
+						Exposure:<br>
+						Zoom:<br>
+						Brightness:<br>
+						Contrast:<br>
+						Sharpness:<br>
+						Saturation:<br>
+					</div>
+					<div class="setting-value">
+						<a name="cutter">-</a><input name="prop" id="exposure"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input name="prop" id="zoom"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input name="prop" id="brightness"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input name="prop" id="contrast"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input name="prop" id="sharpness"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+						<a name="cutter">-</a><input name="prop" id="saturation"><a name="adder">+</a>&nbsp;&nbsp;&nbsp;&nbsp;<span name="min"></span>&nbsp;&nbsp;<span name="max"></span><br>
+					</div>
+				</div>
+			</div>
+			<div class="grab-container">
+				<a id="btn-grab" class="btn-grab">Grab</a>
+			</div>
+		</div>
+		<div class="left-container inline-block">
+			<div id="video-container" class="video-container">
+			</div>
+			<div id="image-container" class="image-container">
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+        Platform & Browser Support:<br>
+        Internet Explorer 6 or above(32 bit/64 bit), any version of Chrome(32 bit/64 bit), any version of Firefox on Windows.<br>
+        <!-- Safari, Chrome and Firefox on Mac OS X 10.6 or later. -->
+	</div>
+	<img id="imgWait" src="Images/wait.gif" class="imgWait" />
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.config.js"> </script>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.initiate.js"> </script>
+	<script src="Scripts/script.js"></script>
+</body>
+</html>

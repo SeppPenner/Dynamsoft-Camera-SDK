@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>	
+	<title>Image Upload</title>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<meta http-equiv="Content-Language" content="en-us">
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+	<meta name="description" content="This sample demonstrates how to upload images grabbed from webcam in a web application.">
+	<link rel="shortcut icon" href="Images/favicon.ico" />
+	<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<div class="fr inline-block pt15">
+				<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-download.aspx" target="_blank" class="btn-download">Download SDK</a>
+			</div>
+			<div class="left-header inline-block">
+				<div class="">
+					<div class="inline-block square-icon vt">
+					    <img src="Images/logo-dws.png" />
+					</div>
+					<div class="inline-block vt">
+						<div class="vt links">
+							<a href="http://www.dynamsoft.com/" target="_blank" class="bluelink">Dynamsoft</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/products/dynamsoft-webcam-sdk.aspx" target="_blank" class="bluelink">Dynamsoft Webcam SDK</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-sample-download.aspx" target="_blank" class="bluelink">Code Gallery</a>
+							<span> / </span>
+						</div>
+						<div class="title vb">
+							Image Upload
+						</div>
+					</div>
+				</div>
+				<div class="mt32">
+					This sample demonstrates how to upload images grabbed from webcam in a web application.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-container">
+		<div class="tc">
+			<div class="left-container vt">
+				<div id="video-container" class="video-container"></div>
+				<div id="grab-container" class="grab-container tc">
+					<a id="btn-grab" class="btn-grab" onclick="onBtnGrabClick();">Grab</a>
+				</div>
+			</div>
+			<div class="right-container tl">
+				<div id="image-container" class="image-container"></div>
+				<div id="upload-container" class="upload-container">
+					<p>File Name:&nbsp;&nbsp;&nbsp;&nbsp;<input id="txtFileName" class="file-name-input"><br></p>
+					<p>
+                        <label><input type="radio" name="img-format" value="BMP" onchange="setCheckboxEnable(this.value);">BMP</label>
+                        <label><input type="radio" name="img-format" value="JPEG" onchange="setCheckboxEnable(this.value);">JPEG</label>
+                        <label><input type="radio" name="img-format" value="TIFF" onchange="setCheckboxEnable(this.value);">TIFF</label>
+                        <label><input type="radio" name="img-format" value="PNG" onchange="setCheckboxEnable(this.value);" checked>PNG</label>
+                        <label><input type="radio" name="img-format" value="PDF" onchange="setCheckboxEnable(this.value);">PDF</label>
+                    </p>
+					<p>
+                        <label><input type="checkbox" name="multi" value="TIFF" id="ckbTiff">Muti-Page TIFF</label>
+                        <label><input type="checkbox" name="multi" value="PDF" id="ckbPdf">Muti-Page PDF</label>
+                    </p>
+					<a id="btn-upload" class="btn-upload" onclick="onBtnUploadClick(this);">Upload</a>
+				</div>
+				<div id="uploaded-container" class="uploaded-container">
+					<p>Uploaded images</p>
+                    <div id="image-links">
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		Platform & Browser Support:<br>
+		Internet Explorer 6 or above(32 bit/64 bit), any version of Chrome(32 bit/64 bit), any version of Firefox on Windows.
+	</div>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.config.js"> </script>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.initiate.js"> </script>
+    <script type="text/javascript" src="Scripts/script.js"></script>
+</body>
+</html>

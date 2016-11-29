@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Online video streaming</title>
+	<meta name="description" content="This sample demonstrates how to implement online video streaming and edit images grabbed from webcam, including rotating, flipping and mirroring, etc.">
+	<link rel="shortcut icon" href="Images/favicon.ico" />
+	<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+	<div class="header">
+		<div class="header-container">
+			<div class="fr inline-block pt15">
+				<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-download.aspx" target="_blank" class="btn-download">Download SDK</a>
+			</div>
+			<div class="left-header inline-block">
+				<div class="">
+					<div class="inline-block square-icon vt">
+						<img src="Images/logo-dws.png">
+					</div>
+					<div class="inline-block vt">
+						<div class="vt links">
+							<a href="http://www.dynamsoft.com/" target="_blank" class="bluelink">Dynamsoft</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/products/dynamsoft-webcam-sdk.aspx" target="_blank" class="bluelink">Dynamsoft Webcam SDK</a>
+							<span> / </span>
+							<a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-sample-download.aspx" target="_blank" class="bluelink">Code Gallery</a>
+							<span> / </span>
+						</div>
+						<div class="title vb">
+							Image Edit
+						</div>
+					</div>
+				</div>
+				<div class="mt32">
+					This sample demonstrates how to edit images grabbed from webcam, including rotating,   flipping and mirroring, etc.
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="content-container">
+		<div class="tc">
+			<div class="left-container">
+				<div id="video-container" class="video-container"></div>
+				<a id="btn-grab" class="btn-grab" onclick="onBtnGrabClick()">Grab</a>
+			</div>
+			<div class="right-container">
+				<div id="image-container" id="image-container" class="image-container"></div>
+				<div class="editbar">
+					Edit Image:
+					<div class="editBtns">
+						<img id="edit-rl" title="rotate left" src="Images/rotate-left.png" onclick="onRotateLeft()">
+						<img id="edit-rr" title="rotate right" src="Images/rotate-right.png" onclick="onRotateRight()">
+						<img id="edit-r180" title="rotate 180°" src="Images/rotate-180.png" onclick="onRotate180()">
+						<img id="edit-mirr" title="mirror" src="Images/mirror.png" onclick="onMirror()">
+						<img id="edit-flip" title="flip" src="Images/flip.png" onclick="onFlip()">
+						<img id="edit-cs" title="change size" src="Images/change-size.png" onclick="onChangeSize()">
+						<img id="edit-crop" title="crop" src="Images/crop.png" onclick="onCrop()">
+					</div>
+				</div>
+				<div id="changeSizeBar" class="changeSizeBar" style="display:none;">
+					<div class="line">
+						<div class="right">
+							<input id="horizontal">%
+						</div>
+						Horizontal:
+					</div>
+					<div class="line">
+						<div class="right">
+							<input id="vertical">%
+						</div>
+						Vertical:
+					</div>
+					<div class="line">
+						<div class="right">
+							<select id="interpolationMethod">
+								<option value="NN" selected="">NearestNeighbor</option>
+								<option value="BL">Bilinear</option>
+								<option value="BC">Bicubic</option>
+							</select>
+						</div>
+						Interpolation:
+					</div>
+					<div class="btnline"><a id="changeSizeOk" class="btn-ok" onclick="onChangeSizeOk()">OK</a><a id="changeSizeCancel" class="btn-cancel" onclick="onChangeSizeCancel()">Cancel</a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+        Platform & Browser Support:<br>
+        Internet Explorer 6 or above(32 bit/64 bit), any version of Chrome(32 bit/64 bit), any version of Firefox on Windows.<br>
+        <!-- Safari, Chrome and Firefox on Mac OS X 10.6 or later. -->
+	</div>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.config.js"> </script>
+    <script type="text/javascript" src="DWSResources/dynamsoft.webcam.initiate.js"> </script>
+	<script src="Scripts/script.js"></script>
+</body>
+</html>
