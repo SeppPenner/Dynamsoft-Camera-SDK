@@ -12,39 +12,51 @@ function getElementsByName(name, tag) {
 	return returns;  
 };
 
-var dwsObject, imageViewer;
+var dcsObject, imageViewer;
 
 function onInitSuccess(videoViewerId, imageViewerId) {
-    dwsObject = dynamsoft.dwsEnv.getObject(videoViewerId);
-    imageViewer = dwsObject.getImageViewer(imageViewerId);    
+    dcsObject = dynamsoft.dcsEnv.getObject(videoViewerId);
+    imageViewer = dcsObject.getImageViewer(imageViewerId);    
 
 
 	/*** camera select ***/ 
 	var camList;
 
 	var setCameraList = function(){
-		camList = dwsObject.camera.getCameraList();
+		camList = dcsObject.camera.getCameraList();
 		document.getElementById("selectCamera").innerHTML = "";
 		for(var i=0; i<camList.length; ++i){
 			document.getElementById("selectCamera").options.add(new Option(camList[i], camList[i]));
 		}
 	};
 
+    var sourceSelectDom = document.getElementById("selectCamera");
+
     // get the latest camera list in the event onmouseover
-	document.getElementById("selectCamera").onmouseover = function(){
-		var curSelected = this.value;
-		setCameraList();
-		this.value = curSelected;
-	};
+    // if firefox, use event click
+    var isFireFox = navigator.userAgent.indexOf("Firefox") > 0;
+    if(isFireFox){
+    	sourceSelectDom.onclick = function(){
+			var curSelected = this.value;
+			setCameraList();
+			this.value = curSelected;
+		};
+    }else{
+    	sourceSelectDom.onmouseover = function(){
+			var curSelected = this.value;
+			setCameraList();
+			this.value = curSelected;
+		};
+    }
 
 	// select camera
-	document.getElementById("selectCamera").onchange = function(){
+	sourceSelectDom.onchange = function(){
 		imgWait.show();
 		// setTimeout: makes the wait-img.gif show in chrome
 		setTimeout(function(){
-			dwsObject.camera.selectCamera(document.getElementById("selectCamera").value);
+			dcsObject.camera.selectCamera(document.getElementById("selectCamera").value);
 			setResolutionList();
-			dwsObject.camera.playVideo();
+			dcsObject.camera.playVideo();
 			camCtrl.init();
 			camCtrl.auto ? camCtrl.beAuto() : camCtrl.beManual();
 			imgWait.hide();
@@ -57,12 +69,12 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 	var resList;
 
 	var setResolutionList = function(){
-		resList = dwsObject.camera.resolution.getAllowedValues();
+		resList = dcsObject.camera.resolution.getAllowedValues();
 		document.getElementById("selectResolution").innerHTML = "";
 		for(var i=0; i<resList.length; ++i){
 			document.getElementById("selectResolution").options.add(new Option(""+resList[i].width+' x '+resList[i].height, i));
 		}
-		var curRes = dwsObject.camera.resolution.getCurrent();
+		var curRes = dcsObject.camera.resolution.getCurrent();
 		var curResIndex = -1;
 		for(var i=0; i<resList.length; ++i){
 			if(resList[i].width == curRes.width && resList[i].height == curRes.height){
@@ -73,7 +85,7 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 	};
 
 	document.getElementById("selectResolution").onchange = function(){
-		dwsObject.camera.resolution.setCurrent(resList[document.getElementById("selectResolution").value]);
+		dcsObject.camera.resolution.setCurrent(resList[document.getElementById("selectResolution").value]);
 	};
 
 	/*** resolution select end ***/ 
@@ -82,8 +94,8 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 	setCameraList();
     if (camList.length > 0) {
     	document.getElementById("selectCamera").value = camList[0];
-        dwsObject.camera.takeCameraOwnership(camList[0]);
-        dwsObject.camera.playVideo(); 
+        dcsObject.camera.takeCameraOwnership(camList[0]);
+        dcsObject.camera.playVideo(); 
     } else {
         alert('No camera is connected.');
     }
@@ -97,50 +109,50 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 		auto:true,
 		//video settings
 		brightness:{
-			aim:dwsObject.camera.brightness
+			aim:dcsObject.camera.brightness
 		},
 		contrast:{
-			aim:dwsObject.camera.contrast
+			aim:dcsObject.camera.contrast
 		},
 		saturation:{
-			aim:dwsObject.camera.saturation
+			aim:dcsObject.camera.saturation
 		},
 		sharpness:{
-			aim:dwsObject.camera.sharpness
+			aim:dcsObject.camera.sharpness
 		},
 		gamma:{
-			aim:dwsObject.camera.gamma
+			aim:dcsObject.camera.gamma
 		},
 		gain:{
-			aim:dwsObject.camera.gain
+			aim:dcsObject.camera.gain
 		},
 		whiteBalanceTemperature:{
-			aim:dwsObject.camera.whiteBalanceTemperature
+			aim:dcsObject.camera.whiteBalanceTemperature
 		},
 		backlightCompensation:{
-			aim:dwsObject.camera.backlightCompensation
+			aim:dcsObject.camera.backlightCompensation
 		},
 		//camera settings
 		pan:{
-			aim:dwsObject.camera.pan
+			aim:dcsObject.camera.pan
 		},
 		tilt:{
-			aim:dwsObject.camera.tilt
+			aim:dcsObject.camera.tilt
 		},
 		roll:{
-			aim:dwsObject.camera.roll
+			aim:dcsObject.camera.roll
 		},
 		zoom:{
-			aim:dwsObject.camera.zoom
+			aim:dcsObject.camera.zoom
 		},
 		exposure:{
-			aim:dwsObject.camera.exposure
+			aim:dcsObject.camera.exposure
 		},
 		iris:{
-			aim:dwsObject.camera.iris
+			aim:dcsObject.camera.iris
 		},
 		focus:{
-			aim:dwsObject.camera.focus
+			aim:dcsObject.camera.focus
 		},
 		init:function(){
 			for(var i=0; i < arrProp.length; ++i){
@@ -162,6 +174,8 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 				var prop = camCtrl[vbox.id];
 				if(prop.val == null){
 					// null means the property is not supported
+					mins[i].innerHTML = null;
+					maxs[i].innerHTML = null;
 					continue;
 				}
 				mins[i].innerHTML = prop.min;
@@ -360,20 +374,20 @@ var imgWait = {
 };
 
 document.getElementById('btn-grab').onclick = function () {
-    if (!dwsObject) return;
+    if (!dcsObject) return;
 
-    dwsObject.camera.captureImage('image-container');
+    dcsObject.camera.captureImage('image-container');
 
-    if (dwsObject.getErrorCode() !== EnumDWS_ErrorCode.OK) {
-        alert('Capture error: ' + dwsObject.getErrorString());
+    if (dcsObject.getErrorCode() !== EnumDCS_ErrorCode.OK) {
+        alert('Capture error: ' + dcsObject.getErrorString());
     }
 };
 
 imgWait.show();
-dynamsoft.dwsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
+dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
 
 window.onbeforeunload = function () {
-    if (dwsObject) dwsObject.destroy();
+    if (dcsObject) dcsObject.destroy();
 };
 
 //button show hide

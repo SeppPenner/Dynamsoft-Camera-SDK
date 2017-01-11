@@ -1,40 +1,40 @@
-var dwsObject, imageViewer;
+var dcsObject, imageViewer;
 
-//Success callback function for dynamsoft.dwsEnv.init()
+//Success callback function for dynamsoft.dcsEnv.init()
 function onInitSuccess(videoViewerId, imageViewerId) {
-    dwsObject = dynamsoft.dwsEnv.getObject(videoViewerId); //Get the Dynamsoft Webcam SDK object
-    imageViewer = dwsObject.getImageViewer(imageViewerId); //Get a specific image viewer
+    dcsObject = dynamsoft.dcsEnv.getObject(videoViewerId); //Get the Dynamsoft Camera SDK object
+    imageViewer = dcsObject.getImageViewer(imageViewerId); //Get a specific image viewer
 
-    var cameraList = dwsObject.camera.getCameraList(); //Get a list of available cameras
+    var cameraList = dcsObject.camera.getCameraList(); //Get a list of available cameras
     if (cameraList.length > 0) {
 		//Call this method to take the ownership back, 
-		//in case the first camera in the list is occupied by another Dynamsoft Webcam process.
-        dwsObject.camera.takeCameraOwnership(cameraList[0]);
-        dwsObject.camera.playVideo();
+        //in case the first camera in the list is occupied by another Dynamsoft Camera process.
+        dcsObject.camera.takeCameraOwnership(cameraList[0]);
+        dcsObject.camera.playVideo();
     } else {
         alert('No camera is connected.');
     }
 }
 
-//Failure callback function for dynamsoft.dwsEnv.init()
+//Failure callback function for dynamsoft.dcsEnv.init()
 function onInitFailure(errorCode, errorString) {
     alert('Init failed: ' + errorString);
 };
 
 function onBtnGrabClick() {
-    if (!dwsObject) return;
+    if (!dcsObject) return;
 
-    dwsObject.camera.captureImage('image-container');
+    dcsObject.camera.captureImage('image-container');
 
-    if (dwsObject.getErrorCode() !== EnumDWS_ErrorCode.OK) {
-        alert('Capture error: ' + dwsObject.getErrorString());
+    if (dcsObject.getErrorCode() !== EnumDCS_ErrorCode.OK) {
+        alert('Capture error: ' + dcsObject.getErrorString());
     }
 };
 
-//initiate Dynamsoft Webcam SDK object
-dynamsoft.dwsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure); 
+//initiate Dynamsoft Camera SDK object
+dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure); 
 
-//destroy Dynamsoft Webcam SDK object when the page is closed
+//destroy Dynamsoft Camera SDK object when the page is closed
 window.onbeforeunload = function() {
-    if (dwsObject) dwsObject.destroy();
+    if (dcsObject) dcsObject.destroy();
 };

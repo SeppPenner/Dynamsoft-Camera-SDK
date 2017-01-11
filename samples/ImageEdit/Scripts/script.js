@@ -80,16 +80,16 @@ function onCrop(){
     imageViewer.image.crop(ai.index, ai.left, ai.top, ai.right, ai.bottom);
 };
 
-var dwsObject, imageViewer;
+var dcsObject, imageViewer;
 
 function onInitSuccess(videoViewerId, imageViewerId) {
-    dwsObject = dynamsoft.dwsEnv.getObject(videoViewerId);
-    imageViewer = dwsObject.getImageViewer(imageViewerId);    
+    dcsObject = dynamsoft.dcsEnv.getObject(videoViewerId);
+    imageViewer = dcsObject.getImageViewer(imageViewerId);    
 
-    var cameraList = dwsObject.camera.getCameraList();
+    var cameraList = dcsObject.camera.getCameraList();
     if (cameraList.length > 0) {
-        dwsObject.camera.takeCameraOwnership(cameraList[0]);
-        dwsObject.camera.playVideo();
+        dcsObject.camera.takeCameraOwnership(cameraList[0]);
+        dcsObject.camera.playVideo();
     } else {
         alert('No camera is connected.');
     }
@@ -100,17 +100,17 @@ function onInitFailure(errorCode, errorString) {
 };
 
 function onBtnGrabClick() {
-    if (!dwsObject) return;
+    if (!dcsObject) return;
 
-    dwsObject.camera.captureImage('image-container');
+    dcsObject.camera.captureImage('image-container');
 
-    if (dwsObject.getErrorCode() !== EnumDWS_ErrorCode.OK) {
-        alert('Capture error: ' + dwsObject.getErrorString());
+    if (dcsObject.getErrorCode() !== EnumDCS_ErrorCode.OK) {
+        alert('Capture error: ' + dcsObject.getErrorString());
     }
 };
 
-dynamsoft.dwsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
+dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
 
 window.onbeforeunload = function() {
-    if (dwsObject) dwsObject.destroy();
+    if (dcsObject) dcsObject.destroy();
 };

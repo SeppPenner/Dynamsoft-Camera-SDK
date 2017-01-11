@@ -12,16 +12,16 @@ function getElementsByName(name, tag) {
 	return returns;  
 };
 
-var dwsObject, imageViewer;
+var dcsObject, imageViewer;
 
 function onInitSuccess(videoViewerId, imageViewerId) {
-    dwsObject = dynamsoft.dwsEnv.getObject(videoViewerId);
-    imageViewer = dwsObject.getImageViewer(imageViewerId);    
+    dcsObject = dynamsoft.dcsEnv.getObject(videoViewerId);
+    imageViewer = dcsObject.getImageViewer(imageViewerId);    
 
-    var cameraList = dwsObject.camera.getCameraList();
+    var cameraList = dcsObject.camera.getCameraList();
     if (cameraList.length > 0) {
-        dwsObject.camera.takeCameraOwnership(cameraList[0]);
-        dwsObject.camera.playVideo();
+        dcsObject.camera.takeCameraOwnership(cameraList[0]);
+        dcsObject.camera.playVideo();
     } else {
         alert('No camera is connected.');
     }
@@ -33,22 +33,22 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 	var camCtrl = {
 		auto:true,
 		exposure:{
-			aim:dwsObject.camera.exposure
+			aim:dcsObject.camera.exposure
 		},
 		zoom:{
-			aim:dwsObject.camera.zoom
+			aim:dcsObject.camera.zoom
 		},
 		brightness:{
-			aim:dwsObject.camera.brightness
+			aim:dcsObject.camera.brightness
 		},
 		contrast:{
-			aim:dwsObject.camera.contrast
+			aim:dcsObject.camera.contrast
 		},
 		sharpness:{
-			aim:dwsObject.camera.sharpness
+			aim:dcsObject.camera.sharpness
 		},
 		saturation:{
-			aim:dwsObject.camera.saturation
+			aim:dcsObject.camera.saturation
 		},
 		init:function(){
 			for(var i=0; i < arrProp.length; ++i){
@@ -70,6 +70,8 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 				var prop = camCtrl[vbox.id];
 				if(prop.val == null){
 					// null means the property is not supported
+					mins[i].innerHTML = null;
+					maxs[i].innerHTML = null;
 					continue;
 				}
 				mins[i].innerHTML = prop.min;
@@ -252,18 +254,18 @@ var imgWait = {
 };
 
 document.getElementById('btn-grab').onclick = function () {
-    if (!dwsObject) return;
+    if (!dcsObject) return;
 
-    dwsObject.camera.captureImage('image-container');
+    dcsObject.camera.captureImage('image-container');
 
-    if (dwsObject.getErrorCode() !== EnumDWS_ErrorCode.OK) {
-        alert('Capture error: ' + dwsObject.getErrorString());
+    if (dcsObject.getErrorCode() !== EnumDCS_ErrorCode.OK) {
+        alert('Capture error: ' + dcsObject.getErrorString());
     }
 };
 
 imgWait.show();
-dynamsoft.dwsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
+dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
 
 window.onbeforeunload = function() {
-    if (dwsObject) dwsObject.destroy();
+    if (dcsObject) dcsObject.destroy();
 };

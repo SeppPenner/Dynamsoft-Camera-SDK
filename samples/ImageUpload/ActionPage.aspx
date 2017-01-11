@@ -10,7 +10,7 @@
         if (string.IsNullOrEmpty(fileName)) fileName = file.FileName;
         string filePath = Server.MapPath(".") + "\\UploadedImages\\" + fileName;
 
-        if (file.ContentType.Trim().Equals("application/octet-stream"))
+        if (!file.ContentType.Contains("text/plain"))
         {
             file.SaveAs(filePath);
         }
