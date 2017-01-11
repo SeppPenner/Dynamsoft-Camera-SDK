@@ -25,12 +25,12 @@ http://www.dynamsoft.com/Downloads/dynamsoft-webcam-sdk-sample-download.aspx
 
 ## Getting Started: Hello World
 ---------------------------------
-1. Create a new web project and copy the **DWSResources** folder to your project:
+1. Create a new web project and copy the **DCSResources** folder to your project:
 2. Create an HTML page and include the JavaScript libraries in sequence:
 
     ```HTML
-    <script type="text/javascript" src="DWSResources/dynamsoft.camera.config.js"> </script>
-    <script type="text/javascript" src="DWSResources/dynamsoft.camera.initiate.js"> </script>
+    <script type="text/javascript" src="DCSResources/dynamsoft.camera.config.js"> </script>
+    <script type="text/javascript" src="DCSResources/dynamsoft.camera.initiate.js"> </script>
     ```
 3. Add video and image container:
 
@@ -89,7 +89,7 @@ http://www.dynamsoft.com/Downloads/dynamsoft-webcam-sdk-sample-download.aspx
     window.onbeforeunload = function() {
         if (dcsObject) dcsObject.destroy();
     };
-    
+
     ```
 
 ## Screenshot
