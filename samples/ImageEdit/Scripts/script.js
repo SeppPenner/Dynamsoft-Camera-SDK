@@ -93,10 +93,14 @@ function onInitSuccess(videoViewerId, imageViewerId) {
     } else {
         alert('No camera is connected.');
     }
+	
+	showLoadingLayer(false);
 }
 
 function onInitFailure(errorCode, errorString) {
     alert('Init failed: ' + errorString);
+	
+	showLoadingLayer(false);
 };
 
 function onBtnGrabClick() {
@@ -109,8 +113,26 @@ function onBtnGrabClick() {
     }
 };
 
+//show loading layer
+showLoadingLayer(true);
+
 dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
 
 window.onbeforeunload = function() {
     if (dcsObject) dcsObject.destroy();
 };
+
+//triggered when dcs service is not found
+dynamsoft.dcsEnv.ondcsnotfound = function() {
+    showLoadingLayer(false);
+	return false;
+};
+
+//show or hide loading layer
+function showLoadingLayer(bShow){
+	var loaderContent = document.getElementById('loaderContent'),
+		elLoadingLayer = document.getElementById('loadingLayer');
+
+	loaderContent.style.display = bShow ? 'block' : 'none';
+	elLoadingLayer.style.display = bShow ? 'block' : 'none';
+}

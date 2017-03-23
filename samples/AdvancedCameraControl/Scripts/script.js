@@ -356,12 +356,13 @@ function onInitSuccess(videoViewerId, imageViewerId) {
 	document.getElementById("cameraAuto").checked = true;
 	camCtrl.beAuto();
 
-	// onInitSuccess finishes
-	imgWait.hide();
+	showLoadingLayer(false);
 }
 
 function onInitFailure(errorCode, errorString) {
     alert('Init failed: ' + errorString);
+	
+	showLoadingLayer(false);
 };
 
 var imgWait = {
@@ -383,7 +384,9 @@ document.getElementById('btn-grab').onclick = function () {
     }
 };
 
-imgWait.show();
+//show loading layer
+showLoadingLayer(true);
+
 dynamsoft.dcsEnv.init('video-container', 'image-container', onInitSuccess, onInitFailure);
 
 window.onbeforeunload = function () {
@@ -411,4 +414,25 @@ for(var i = 0; i < btnShows.length; ++i){
 			}
 		};
 	})();
+}
+
+//triggered when dcs service is not found
+dynamsoft.dcsEnv.ondcsnotfound = function() {
+    showLoadingLayer(false);
+	return false;
+};
+
+//show or hide loading layer
+function showLoadingLayer(bShow){
+	var loaderContent = document.getElementById('loaderContent'),
+		elLoadingLayer = document.getElementById('loadingLayer');
+
+	loaderContent.style.display = bShow ? 'block' : 'none';
+	elLoadingLayer.style.display = bShow ? 'block' : 'none';
+	
+	var sltCamera = document.getElementById('selectCamera'),
+		sltRes = document.getElementById('selectResolution');
+		
+	sltCamera.disabled = bShow;
+	sltRes.disabled = bShow;
 }

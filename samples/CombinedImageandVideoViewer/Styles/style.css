@@ -124,7 +124,46 @@ a{
 	color: #606060;
 	border-top: solid 1px #ddd;
 }
-
+#loaderContent {
+	text-align: center;
+    position: fixed;
+    _position: absolute;
+    width: 160px;
+    height: 120px;
+    left: 50%;
+    _left: expression((((w=document.documentElement.clientWidth)?w:document.body.clientWidth)+((l=document.documentElement.scrollLeft)?l:document.body.scrollLeft))/2+'px');
+    top: 50%;
+    _top: expression((((h=document.documentElement.clientHeight)?h:document.body.clientHeight)+((t=document.documentElement.scrollTop)?t:document.body.scrollTop))/2+'px');
+    margin-left: -80px;
+    margin-top: -60px;
+    z-index: 101;
+}
+#imgLoader{
+	width:160px;
+	height:120px;
+}
+#spLoader{
+	color: white;
+	font-size: 14px;
+	position: relative;
+    top: -25px;
+    left: 5px;
+}
+#loadingLayer {
+    position: fixed;
+    _position: absolute;
+    top: 0;
+    _top: expression(0+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');
+    left: 0;
+    _left: expression(0+((e=document.documentElement.scrollLeft)?e:document.body.scrollLeft)+'px');
+    width: 100%;
+    height: 100%;
+    _height: expression(0+((e=document.documentElement.clientHeight)?e:document.body.clientHeight)+'px');
+    background: #000000;
+    opacity: .3;
+    filter: Alpha(Opacity=30);
+    z-index: 100;
+}
 
 .tc { text-align: center; }
 .tr { text-align: right; }
@@ -133,6 +172,7 @@ a{
 .fr { float: right; }
 .inline-block { display:inline-block;*display:inline;*zoom:1; }
 .block { display: block; }
+.invisible { display: none; }
 .nowrap { white-space: nowrap; }
 
 .cl { clear: both; }
