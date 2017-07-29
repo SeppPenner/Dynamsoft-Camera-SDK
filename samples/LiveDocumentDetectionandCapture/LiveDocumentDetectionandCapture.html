@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Camera Library | DirectShow API</title>
+<meta name="description" content="This sample demonstrates how to use Dynamsoft Camera SDK to detect automatically and capture document from live video.">
+<link rel="shortcut icon" href="Images/favicon.ico" />
+<link rel="stylesheet" href="Styles/style.css">
+</head>
+<body>
+<div id="wrapper">
+    <div class="header">
+        <div class="header-container">
+            <div class="fr inline-block"> <a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-download.aspx" target="_blank" class="btn-download">Download SDK</a> </div>
+            <div class="left-header inline-block">
+                <div class="">
+                    <div class="inline-block square-icon vt"> <img src="Images/logo-dcs.png"> </div>
+                    <div class="inline-block vt">
+                        <div class="vt links"> <a href="http://www.dynamsoft.com/" target="_blank" class="bluelink">Dynamsoft</a> <span> / </span> <a href="http://www.dynamsoft.com/products/dynamsoft-webcam-sdk.aspx" target="_blank" class="bluelink">Dynamsoft Camera SDK</a> <span> / </span> <a href="http://www.dynamsoft.com/downloads/dynamsoft-webcam-sdk-sample-download.aspx" target="_blank" class="bluelink">Code Gallery</a> <span> / </span> </div>
+                        <div class="title vb"> Live Document Detection and Capture </div>
+                    </div>
+                </div>
+                <div class="mt15"> This sample demonstrates how to use Dynamsoft Camera SDK to detect automatically and capture document from live video. </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="tc clearfix">
+            <div id="video-container" class="main-container inline-block"></div>
+            <div id="image-container" class="main-container inline-block"></div>
+        </div>
+        <div class="mt30"> <a id="btn-grab" class="btn-grab" onclick="onBtnGrabClick()">Capture</a> </div>
+    </div>
+    <div class="footer">
+        <div class="footer-container"> Platform & Browser Support: Internet Explorer 6 or above(32 bit/64 bit), any version of Chrome(32 bit/64 bit), any version of Firefox on Windows. </div>
+    </div>
+    <div id="loaderContent" class="invisible" > <img id="imgLoader" src="Images/loader.gif" /> <span id="spLoader">Initiating...</span> </div>
+    <div id="loadingLayer" class="invisible"></div>
+</div>
+<script type="text/javascript" src="DCSResources/dynamsoft.camera.config.js"> </script> 
+<script type="text/javascript" src="DCSResources/dynamsoft.camera.initiate.js"> </script> 
+<script src="Scripts/script.js"></script>
+</body>
+</html>

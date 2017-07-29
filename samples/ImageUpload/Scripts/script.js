@@ -1,3 +1,5 @@
+var actionPage = 'ActionPage.aspx';
+
 var dcsObject, imageViewer;
 
 function onInitSuccess(videoViewerId, imageViewerId) {
@@ -34,7 +36,7 @@ function onUploadSuccess() {
         var linkText = document.createTextNode(fileName);
         a.appendChild(linkText);
         a.title = fileName;
-        a.href = getCurPagePath() + 'UploadedImages/' + fileName;
+        a.href = getCurPagePath() + 'UploadedImages/' + fileName + '?v=' + (new Date).getTime();;
         a.target = '_blank';
 
         var divImgLinks = document.getElementById('image-links'),
@@ -60,7 +62,7 @@ function onBtnUploadClick() {
     }
 
     var counter,
-        url = getCurPagePath() + 'ActionPage.aspx',
+        url = getCurPagePath() + actionPage,
         fileName = getFileName(),
         imageType = getCurEnumImageType(),
         bMultiImages = isImgTypeChksChecked(),
